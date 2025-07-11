@@ -1,17 +1,19 @@
-from setuptools import find_packages, setup
+from setuptools import setup
+import os
+from glob import glob
 
 package_name = 'b3rb_ros_aim_india'
 
 setup(
     name=package_name,
     version='0.0.0',
-    packages=find_packages(exclude=['test']),
+    packages=[package_name],
     data_files=[
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
-        # ('share/ament_index/resource_index', ['resource/coco.yaml']),
-        # ('share/ament_index/resource_index', ['resource/yolov5n-int8.tflite']),
         ('share/' + package_name, ['package.xml']),
+        # Add this line to install launch files
+        (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*launch.[pxy][yeml]'))),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
